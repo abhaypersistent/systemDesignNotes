@@ -75,3 +75,42 @@ managerComm.execute(new PlaceOrderCommand("Maha prasad", '3232'));
 managerComm.execute( new TrackOrderCommand("3232"))
 managerComm.execute(new CancelOrderCommand("3232"));
 
+
+// Pros
+// The command pattern allows us to decouple methods from the object that executes the operation. It gives you more control if you’re dealing with commands that have a certain lifespan, or commands that should be queued and executed at specific times.
+
+// Cons
+// The use cases for the command pattern are quite limited, and often adds unnecessary boilerplate to an application.
+
+function Manager(){
+    this.item = [];
+}
+
+Manager.prototype = {
+    do: function(name){
+        // var args = Array.from(arguments).slice(1)[0];
+        var args = Array.prototype.slice.call(arguments,1)[0]
+        var fnName = "_" + name;
+        if(this[fnName]){
+            this[fnName](args);
+        }
+    },
+    _add: function(item){
+        console.log('adding item.........');
+        this.item.push(item);
+        console.log(this.item);
+    },
+    _remove: function (item){
+        console.log('removing............');
+        this.item.splice(this.item.indexOf(item), 1);
+        console.log(this.item);
+    }
+}
+
+var m = new Manager();
+m.do('add', 1);
+m.do('add', 3);
+m.do('add', 6);
+m.do('remove', 6);
+m.do('start', 6);
+
