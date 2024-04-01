@@ -47,3 +47,10 @@ const personProxy = new Proxy(person, {
       }
     },
   });
+
+
+  // Reflect
+  // Its built-in-object 
+  // manipulate the target object when working with the proxies
+
+  
